@@ -6,7 +6,7 @@ This is a KFC end to end tests playwright automation framework. It is written in
 
 # Here is the framework structure
 
-
+```
 |── .github/workflows       <-- CI/CD Integration. Note: It is not implemented. Given the extra time it can be done
 │   └── playwright.yaml 
 ├── .env.uat                <-- UAT URLs & Credentials
@@ -49,7 +49,7 @@ This is a KFC end to end tests playwright automation framework. It is written in
         │   
         │
         └── report/         <-- (Optional) Custom reporter config
-
+```
 
 # Steps to execute
 
