@@ -12,6 +12,6 @@ Scenario Outline: Customer places a <orderType> order
   Then the user should be able to see the order summary with correct item and price details
 
 Examples:
-  | orderType | location | category         | item              | quantity |
-  | Pick up   | Dee Why  | SIDES & DESSERTS | 4 Dipping Sauces  | 1        |
+  | orderType | location    | category         | item              | quantity |
+  | Pick up   | Dee Why     | SIDES & DESSERTS | 4 Dipping Sauces  | 1        |
   | Pick up   | Parramatta  | SIDES & DESSERTS | 4 Dipping Sauces  | 1        |

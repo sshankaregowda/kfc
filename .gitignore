@@ -1,7 +1,4 @@
 /allure-results
 /logs
 /node_modules
-/playwright-user-data
-/playwright-user-data-chromium
 /test-results
-/playwright-user-data-chrome
