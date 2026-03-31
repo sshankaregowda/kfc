@@ -1,5 +1,6 @@
 import winston from "winston";
 
+// This is log file to generate logs
 export const logger = winston.createLogger({
     level: "info",
     format: winston.format.combine(

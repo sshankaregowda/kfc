@@ -7,7 +7,7 @@ import { MenuPage } from "../pages/MenuPage"
 import { MyCartPage } from "../pages/MyCartPage"
 import { CheckoutPage } from "../pages/CheckoutPage";
 
-
+// Instantiation of page object
 export class CustomWorld extends World {
   debug = false;
   page!: Page;

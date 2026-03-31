@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "npx cucumber-js --format summary"
+    "clean:reports": "rimraf allure-results allure-report test-results/screenshots",
+    "test": "npm run clean:reports && npx cucumber-js",
+    "allure:generate": "npx allure generate ./allure-results -o ./allure-report --clean",
+    "allure:open":"npx allure open ./allure-report"
   },
   "keywords": [],
   "author": "",
@@ -12,8 +15,10 @@
   "devDependencies": {
     "@cucumber/cucumber": "^11.3.0",
     "@playwright/test": "^1.58.2",
+    "allure-commandline": "^2.38.1",
     "allure-cucumberjs": "^3.6.0",
     "dotenv": "^17.3.1",
+    "rimraf": "^6.1.3",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
     "winston": "^3.19.0"

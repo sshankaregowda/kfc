@@ -14,3 +14,4 @@ Scenario Outline: Customer places a <orderType> order
 Examples:
   | orderType | location | category         | item              | quantity |
   | Pick up   | Dee Why  | SIDES & DESSERTS | 4 Dipping Sauces  | 1        |
+  | Pick up   | Parramatta  | SIDES & DESSERTS | 4 Dipping Sauces  | 1        |

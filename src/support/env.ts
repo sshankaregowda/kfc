@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 
 const env = process.env.ENV || "uat";
 
-// Load once
 dotenv.config({ path: `.env.${env}` });
 
 export const config = {
