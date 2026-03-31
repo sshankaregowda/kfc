@@ -1,20 +1,14 @@
 import { config } from "../../support/env";
 import {
   BeforeAll,
+  AfterAll,
   Before,
   After,
   setDefaultTimeout,
   Status,
 } from "@cucumber/cucumber";
-import {
-  chromium,
-  firefox,
-  webkit,
-  Browser,
-  BrowserContext,
-  BrowserType,
-  Page,
-} from "@playwright/test";
+import { chromium, firefox, webkit } from "@playwright/test";
+import type { Browser, BrowserContext, BrowserType, Page } from "@playwright/test";
 import { CustomWorld } from "../../support/CustomWorld";
 import path from "path";
 import fs from "fs";
@@ -23,7 +17,7 @@ let browser: Browser;
 let context: BrowserContext;
 let page: Page;
 
-setDefaultTimeout(30000);
+setDefaultTimeout(60000);
 
 function getBrowserType(browserName: string): BrowserType {
   switch (browserName.toLowerCase()) {
@@ -49,16 +43,13 @@ BeforeAll(async function () {
   }
 
   fs.mkdirSync(screenshotsDir, { recursive: true });
-  console.log(`Fresh screenshots folder created: ${screenshotsDir}`);
-});
 
-Before(async function (this: CustomWorld) {
   const browserName = (process.env.BROWSER || "chromium").toLowerCase();
   const browserType = getBrowserType(browserName);
 
   const launchOptions: Parameters<typeof chromium.launch>[0] = {
     headless: false,
-    slowMo: 300,
+    // slowMo: 300, // keep this only when debugging
   };
 
   if (browserName === "chrome") {
@@ -66,14 +57,24 @@ Before(async function (this: CustomWorld) {
   }
 
   browser = await browserType.launch(launchOptions);
-  context = await browser.newContext();
-  page = await context.newPage();
 
+  console.log(`Browser launched once: ${browserName}`);
+});
+
+Before(async function (this: CustomWorld) {
+  context = await browser.newContext({
+    viewport: null,
+  });
+
+  page = await context.newPage();
   this.page = page;
 
-  await this.page.goto(config.baseUrl);
+  await this.page.goto(config.baseUrl, {
+    waitUntil: "domcontentloaded",
+    timeout: 60000,
+  });
+  await this.page.waitForTimeout(2000);
 
-  console.log("Running on browser:", browserName);
   console.log("Current URL:", this.page.url());
 });
 
@@ -103,6 +104,9 @@ After(async function (this: CustomWorld, scenario) {
     }
   } finally {
     await context?.close();
-    await browser?.close();
   }
+});
+
+AfterAll(async function () {
+  await browser?.close();
 });

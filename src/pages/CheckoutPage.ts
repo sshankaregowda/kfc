@@ -58,6 +58,7 @@ export class CheckoutPage extends BasePage {
     await securityCodeInput.fill(userData.cvv);
 
     logger.info("Attempting final payment");
+    await this.page.waitForTimeout(2000);
     await expect(this.payBtn).toBeEnabled({ timeout: 10000 });
     await this.payBtn.click();
   }
