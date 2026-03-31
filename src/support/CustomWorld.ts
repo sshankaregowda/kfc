@@ -3,6 +3,9 @@ import type { Page } from "@playwright/test";
 import { HomePage } from "../pages/HomePage";
 import { OrderPage } from "../pages/OrderPage";
 import { OrderSummaryPage } from "../pages/OrderSummaryPage";
+import { MenuPage } from "../pages/MenuPage"
+import { MyCartPage } from "../pages/MyCartPage"
+import { CheckoutPage } from "../pages/CheckoutPage";
 
 
 export class CustomWorld extends World {
@@ -20,6 +23,18 @@ export class CustomWorld extends World {
 
   get orderSummaryPage() {
     return new OrderSummaryPage(this.page)
+  }
+
+  get menuPage(){
+        return new MenuPage(this.page)
+  }
+
+  get myCartPage(){
+        return new MyCartPage(this.page)
+  }
+
+  get checkoutPage(){
+        return new CheckoutPage(this.page)
   }
 }
 

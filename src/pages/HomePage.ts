@@ -8,7 +8,8 @@ export class HomePage extends BasePage{
   private readonly startOrderHeader = this.page.getByRole('heading', { level: 2, name: 'START YOUR ORDER' })
 
   async verifyHomePage() {
-    await expect(this.page).toHaveURL(/kfc/)
+    await expect(this.page).toHaveURL(/kfc/, {timeout : 30000})
+    await this.page.waitForLoadState('load');
     await expect(this.kfcLogo).toBeVisible()
   }
 

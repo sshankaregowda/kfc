@@ -13,6 +13,7 @@ async verifyOrderSummary(orderType: string, restaurantName: string){
 await expect(this.orderTypeLbl).toContainText(orderType)
 await expect(this.kfcRestaurantLbl).toContainText(restaurantName)
 await this.viewMenuBtn.click()
+await expect(this.page).toHaveURL(/menu/)
 
   }
 }

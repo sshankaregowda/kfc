@@ -1,12 +1,12 @@
 // import dotenv from "dotenv";
 
 // dotenv.config({ path: `.env.${process.env.ENV || "uat"}` });
-//import { config } from "../config/env";
+// import { config } from "../../support/env";
 
 
 // import { Before, After } from "@cucumber/cucumber";
 // import { chromium, firefox, webkit, Browser, BrowserContext } from "@playwright/test";
-// import { CustomWorld } from "./CustomWorld";
+// import { CustomWorld } from "../../support/CustomWorld";
 
 // let browser: Browser;
 // let context: BrowserContext;
@@ -50,11 +50,18 @@ import path from "path";
 
 let context: BrowserContext;
 
-setDefaultTimeout(30000);
+setDefaultTimeout(60000);
+
+import fs from "fs";
 
 Before(async function (this: CustomWorld) {
 
   const userDataDir = path.join(process.cwd(), "playwright-user-data");
+
+  // ✅ DELETE CACHE / SESSION
+  if (fs.existsSync(userDataDir)) {
+    fs.rmSync(userDataDir, { recursive: true, force: true });
+  }
 
   context = await chromium.launchPersistentContext(userDataDir, {
     channel: "chrome",
@@ -64,7 +71,7 @@ Before(async function (this: CustomWorld) {
 
   this.page = context.pages()[0] || await context.newPage();
 
-  await this.page.goto(config.baseUrl)
+  await this.page.goto(config.baseUrl);
 
   console.log("Current URL:", this.page.url());
 });
