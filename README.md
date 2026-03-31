@@ -15,7 +15,7 @@ This is a KFC end to end tests playwright automation framework. It is written in
 ├── tsconfig.json           <-- TypeScript compiler settings
 ├── allure-results/         <-- Generated after test run (Git Ignore)
 |── test-results/           <-- Generated after test run (Git Ignore). It generates screenshots on failure
-    └── screenshots         
+|   └── screenshots         
 ├── logs/                   <-- Winston execution logs (Git Ignore)
 │   └── execution.log
 │
